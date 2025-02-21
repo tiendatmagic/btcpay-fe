@@ -1,0 +1,42 @@
+<div class="mx-auto max-w-7xl">
+  <p class="text-center">Đơn hàng mã: {{ id }}
+  </p>
+
+  <ng-container *ngIf="product && product.status">
+    <ng-container *ngIf="timeLeft && product.status =='pending'">
+      <div class="gap-3 md:flex">
+        <div class="w-full text-justify md:w-1/2">
+          <p>Số tiền: {{ product.price | number }}</p>
+          <p>Số lượng: {{ product.quantity | number }}</p>
+          <p>Tổng tiền: {{ product.quantity * product.price | number}}đ</p>
+          <p>Tổng tiền quy đổi BTC: {{ product.total_to_btc ?? 0 }} BTCB</p>
+          <p>Ngày hết hạn: {{ product.expire_date | date : "dd/MM/yyyy HH:mm:ss"}}</p>
+        </div>
+
+        <div class="w-full text-center md:w-1/2">
+          <qrcode qrdata="{{ address }}" [width]="300" [errorCorrectionLevel]="'M'" class="flex justify-center">
+          </qrcode>
+          <p> Sử dụng mạng BSC (Binance Smart Chain để thanh toán)</p>
+          <p class="text-xl font-medium break-all" (click)="copyTotal(product.total_to_btc ?? 0)">{{
+            product.total_to_btc
+            ??
+            0 }} BTCB</p>
+          <p class="break-all" (click)="copyTotal(address)">{{ address }}</p>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="(!timeLeft && product.status =='pending')">
+      <p>Đơn hàng đã hết hạn</p>
+    </ng-container>
+
+    <ng-container *ngIf="(product.status =='completed')">
+      <p>Đơn hàng đã thanh toán thành công</p>
+    </ng-container>
+
+    <ng-container *ngIf="(product.status =='cancelled')">
+      <p>Đơn hàng đã bị huỷ</p>
+    </ng-container>
+  </ng-container>
+
+</div>

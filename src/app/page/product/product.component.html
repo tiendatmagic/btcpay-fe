@@ -1,0 +1,59 @@
+<button routerLink="/create-product"
+  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tạo
+  sản phẩm</button>
+
+<div
+  class="rounded-lg w-full overflow-auto border-[#ececec] dark:border-[#46525f] border-[1px] shadow-sm relative mt-3 py-3 ng-star-inserted">
+  <div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-200">
+      <thead class="text-xs text-gray-700 uppercase bg-[#f3f4f699] dark:bg-[#2a374599] dark:text-gray-200">
+        <tr>
+          <th scope="col" class="px-2 py-3 whitespace-nowrap"> Mã đơn hàng </th>
+          <th scope="col" class="px-2 py-3 whitespace-nowrap"> Tên sản phảm </th>
+          <th scope="col" class="px-2 py-3 whitespace-nowrap"> Số lượng </th>
+          <th scope="col" class="px-2 py-3 whitespace-nowrap"> Đơn giá </th>
+          <th scope="col" class="px-2 py-3 whitespace-nowrap"> Tổng tiền </th>
+          <th scope="col" class="px-2 py-3 whitespace-nowrap"> Ngày tạo </th>
+          <th scope="col" class="px-2 py-3 whitespace-nowrap"> Hành động </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="hover:bg-[#a5a5a50d] dark:hover:bg-[#919eab14] border-b border-[#ececec] dark:border-[#46525f] whitespace-nowrap"
+          *ngFor="let item of product">
+          <td class="px-2 py-4 text-gray-700 whitespace-nowrap dark:text-white">
+            <a class="block hover:underline" href="###"> #{{item.id}} </a>
+          </td>
+          <td class="px-2 py-4 text-gray-700 whitespace-normal dark:text-white">
+            <p class="mat-mdc-tooltip-trigger line-clamp-3 max-w-[100px]"> {{item.product_name}} </p>
+          </td>
+          <td class="px-2 py-4 text-gray-700 whitespace-nowrap dark:text-white">
+            <p class="mat-mdc-tooltip-trigger overflow-hidden text-ellipsis max-w-[85px]"> {{item.quantity | number}}
+            </p>
+          </td>
+          <td class="px-2 py-4 text-gray-700 whitespace-nowrap dark:text-white">
+            <p class="mat-mdc-tooltip-trigger overflow-hidden text-ellipsis max-w-[85px]"> {{item.price | number}} </p>
+          </td>
+          <td class="px-2 py-4 text-gray-700 whitespace-nowrap dark:text-white">
+            <p class="mat-mdc-tooltip-trigger overflow-hidden text-ellipsis max-w-[85px]"> {{ (item.quantity *
+              item.price) | number}} </p>
+          </td>
+          <td class="px-2 py-4 text-gray-700 whitespace-nowrap dark:text-white">
+            <div>
+              <p> {{item.created_at | date : "dd/MM/yyyy"}} </p>
+              <p> {{item.created_at | date : "HH:mm:ss" }} </p>
+            </div>
+          </td>
+          <td class="px-2 py-4 text-gray-700 whitespace-nowrap dark:text-white">
+            <button (click)="createOrder(item.id)"
+              class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              type="button">
+              Tạo lệnh
+            </button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
