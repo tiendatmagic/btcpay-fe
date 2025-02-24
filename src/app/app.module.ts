@@ -22,6 +22,8 @@ import { CreateLinkComponent } from './modal/create-link/create-link.component';
 import { OrderComponent } from './page/order/order.component';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { NotifyComponent } from './modal/notify/notify.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { OrdersComponent } from './page/orders/orders.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
 
@@ -39,7 +41,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreateOrderComponent,
     CreateLinkComponent,
     OrderComponent,
-    NotifyComponent
+    NotifyComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     QRCodeComponent
   ],
   providers: [

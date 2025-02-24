@@ -15,16 +15,18 @@ import { CreateOrderComponent } from '../../modal/create-order/create-order.comp
 })
 export class ProductComponent {
   product: any = [];
+  isLoading: boolean = false;
   constructor(private generateService: GenerateService, private dialog: MatDialog) {
 
   }
 
 
   ngOnInit() {
+    this.isLoading = true;
     this.generateService.getProduct().subscribe(
       (res: any) => {
         this.product = res;
-        console.log(this.product);
+        this.isLoading = false;
       }
     )
   }

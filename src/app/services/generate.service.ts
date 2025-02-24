@@ -33,6 +33,11 @@ export class GenerateService {
     );
   }
 
+  getListOrder() {
+    return this.http.get(`${this.urlEnv}api/get-list-order`).pipe(
+    );
+  }
+
   checkTransaction(data: any) {
     return this.http.post(`${this.urlEnv}api/check-transaction`, data).pipe(
     );

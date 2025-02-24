@@ -14,6 +14,7 @@ export class CreateProductComponent {
   price: FormControl;
   quantity: FormControl;
   content: FormControl;
+  isDisabled = false;
   constructor(_fb: FormBuilder, private generateService: GenerateService) {
     this.productName = new FormControl('', [
       Validators.required
@@ -36,9 +37,10 @@ export class CreateProductComponent {
   }
   onCreateProduct() {
     if (this.createProductForm.valid) {
+      this.isDisabled = true;
       this.generateService.createProduct(this.createProductForm.value).subscribe(
         (res: any) => {
-          console.log(res);
+          this.isDisabled = false;
         }
       );
     }

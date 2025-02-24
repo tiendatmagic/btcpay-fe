@@ -15,6 +15,7 @@ export class CreateOrderComponent {
   createOrderForm: FormGroup;
   quantity: FormControl;
   id: any;
+  isDisabled = false;
   constructor(_fb: FormBuilder, public dialogRef: MatDialogRef<CreateOrderComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private generateService: GenerateService) {
     this.quantity = new FormControl(1, [
       Validators.required
@@ -34,11 +35,11 @@ export class CreateOrderComponent {
   }
 
   createLink() {
-    this.dialogRef.close();
+    this.isDisabled = true;
     this.generateService.createOrder(this.createOrderForm.value).subscribe(
       (res: any) => {
         if (res && res.status == 'success') {
-          console.log(res);
+          this.dialogRef.close();
           this.dialog.open(CreateLinkComponent, {
             width: '90%',
             enterAnimationDuration: '100ms',
@@ -48,6 +49,7 @@ export class CreateOrderComponent {
               link: res.link
             }
           })
+          this.isDisabled = false;
         }
       }
     );
